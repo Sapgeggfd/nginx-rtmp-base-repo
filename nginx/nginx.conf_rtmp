@@ -1,5 +1,11 @@
 worker_processes auto;
+pid /home/container/tmp/nginx.pid;
+include /home/container/modules-enabled/*.conf;
+error_log /home/container/logs/error.log;
+error_log /dev/stdout;
+daemon off;
 rtmp_auto_push on;
+
 events {}
 rtmp {
     server {
