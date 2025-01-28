@@ -9,7 +9,7 @@ cd /mnt/server
 
 # [SETUP] Create necessary folders
 echo -e "[SETUP] Create folders"
-mkdir -p logs tmp www
+mkdir -p logs tmp
 
 # Clone the default repository into a temporary directory
 echo "[Git] Cloning default repository 'https://github.com/Sapgeggfd/nginx-rtmp-base-repo' into temporary directory."
