@@ -7,4 +7,4 @@ rm -rf /home/container/tmp/*
 echo "[Docker] Starting NGINX"
 echo "[Docker] Services successfully launched"
 
-nginx -c /home/container/nginx/nginx.conf -p /home/container
+nginx -c /home/container/nginx/nginx.conf -p /home/container -s reload
