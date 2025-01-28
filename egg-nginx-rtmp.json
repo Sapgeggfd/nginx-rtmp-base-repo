@@ -1,0 +1,31 @@
+{
+    "_comment": "DO NOT EDIT: FILE GENERATED AUTOMATICALLY BY PTERODACTYL PANEL - PTERODACTYL.IO",
+    "meta": {
+        "version": "PTDL_v2",
+        "update_url": null
+    },
+    "exported_at": "2025-01-28T23:02:36+01:00",
+    "name": "nginx-rtmp Server",
+    "author": "contact@sapge.com",
+    "description": "a simple nginx-rtmp server",
+    "features": null,
+    "docker_images": {
+        "sapge/nginx-rtmp-pterodactyl": "sapge/nginx-rtmp-pterodactyl"
+    },
+    "file_denylist": [],
+    "startup": "./nginx.sh",
+    "config": {
+        "files": "{\r\n    \"nginx/conf.d/default.conf\": {\r\n        \"parser\": \"file\",\r\n        \"find\": {\r\n            \"    listen\": \"listen {{server.build.default.port}};\"\r\n        }\r\n    },\r\n    \"php/php.ini\": {\r\n        \"parser\": \"file\",\r\n        \"find\": {\r\n            \"memory_limit =\": \"memory_limit = {{env.memory_limit}};\"\r\n        }\r\n    }\r\n}",
+        "startup": "{\r\n    \"done\": \"[Docker] Services successfully launched\"\r\n}",
+        "logs": "{\r\n    \"location\": \"logs\\/latest.log\"\r\n}",
+        "stop": "^C"
+    },
+    "scripts": {
+        "installation": {
+            "script": "#!/bin/bash\r\n\r\n# [SETUP] Install necessary packages, including git\r\necho -e \"[SETUP] Install packages\"\r\napt-get update -qq > /dev/null 2>&1 && apt-get install -qq > /dev/null 2>&1 -y git wget perl perl-doc fcgiwrap\r\n\r\n# Change to server directory\r\ncd /mnt/server\r\n\r\n# [SETUP] Create necessary folders\r\necho -e \"[SETUP] Create folders\"\r\nmkdir -p logs tmp www\r\n\r\n# Clone the default repository into a temporary directory\r\necho \"[Git] Cloning default repository 'https://github.com/Sapgeggfd/nginx-rtmp-base-repo' into temporary directory.\"\r\ngit clone https://github.com/Sapgeggfd/nginx-rtmp-base-repo /mnt/server/gtemp > /dev/null 2>&1 && echo \"[Git] Repository cloned successfully.\" || { echo \"[Git] Error: Default repository clone failed.\"; exit 21; }\r\n\r\n# Copy the www folder and files from the temporary repository to the target directory\r\necho \"[Git] Copying folder and files from default repository.\"\r\ncp -r /mnt/server/gtemp/nginx /mnt/server || { echo \"[Git] Error: Copying 'nginx' folder failed.\"; exit 22; }\r\ncp /mnt/server/gtemp/nginx.sh /mnt/server || { echo \"[Git] Error: Copying 'nginx.sh' file failed.\"; exit 22; }\r\nchmod +x /mnt/server/nginx.sh\r\n\r\n# Remove the temporary cloned repository\r\nrm -rf /mnt/server/gtemp",
+            "container": "debian:bookworm-slim",
+            "entrypoint": "bash"
+        }
+    },
+    "variables": []
+}
