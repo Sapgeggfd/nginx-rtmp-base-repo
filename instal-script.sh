@@ -22,4 +22,5 @@ cp /mnt/server/gtemp/nginx.sh /mnt/server || { echo "[Git] Error: Copying 'nginx
 chmod +x /mnt/server/nginx.sh
 
 # Remove the temporary cloned repository
+echo "[Git] Clearing temporary folder."
 rm -rf /mnt/server/gtemp
