@@ -7,7 +7,7 @@ ENV DEBIAN_FRONTEND noninteractive
 
 RUN apt-get update \
     && apt-get upgrade -y \
-    && apt-get install -y git apt-transport-https lsb-release ca-certificates wget nginx \
+    && apt-get install -y git apt-transport-https lsb-release ca-certificates wget nginx libnginx-mod-rtmp\
     && apt-get purge -y --auto-remove \
     && rm -rf /var/lib/apt/lists/*
 
