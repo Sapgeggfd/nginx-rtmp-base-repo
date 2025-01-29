@@ -3,6 +3,7 @@
 # [SETUP] Install necessary packages, including git
 echo -e "[SETUP] Install packages"
 apt-get update -qq > /dev/null 2>&1 && apt-get install -qq > /dev/null 2>&1 -y git wget perl perl-doc fcgiwrap
+apt-get install libnginx-mod-rtmp -y
 
 # Change to server directory
 cd /mnt/server
