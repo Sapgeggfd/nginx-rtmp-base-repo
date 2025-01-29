@@ -9,7 +9,7 @@ cd /mnt/server
 
 # [SETUP] Create necessary folders
 echo -e "[SETUP] Create folders"
-mkdir -p logs tmp
+mkdir -p logs tmp nginx/modules-enabled
 
 # Clone the default repository into a temporary directory
 echo "[Git] Cloning default repository 'https://github.com/Sapgeggfd/nginx-rtmp-base-repo' into temporary directory."
@@ -19,6 +19,7 @@ git clone https://github.com/Sapgeggfd/nginx-rtmp-base-repo /mnt/server/gtemp > 
 echo "[Git] Copying folder and files from default repository."
 cp -r /mnt/server/gtemp/nginx /mnt/server || { echo "[Git] Error: Copying 'nginx' folder failed."; exit 22; }
 cp /mnt/server/gtemp/nginx.sh /mnt/server || { echo "[Git] Error: Copying 'nginx.sh' file failed."; exit 22; }
+cp /../../../../../../usr/lib/nginx/modules/ngx_rtmp_module.so /mnt/server/nginx/modules-enabled/ngx_rtmp_module.so
 chmod +x /mnt/server/nginx.sh
 
 # Remove the temporary cloned repository
